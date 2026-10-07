@@ -1,0 +1,29 @@
+{
+  "pages": {
+    "part4-video-full": {
+      "pageId": "nars-part4-video-full",
+      "name": "Part 4 - Full Video",
+      "username": "",
+      "bio": "Watch Part 4 Full Video",
+      "profileImage": "/part4-video-full/preview.jpg",
+      "backgroundImage": "",
+      "ogTitle": "Part 4 - Full Video",
+      "ogDescription": "Watch Part 4 Full Video",
+      "ogImage": "/part4-video-full/preview.jpg",
+      "destinationUrl": "https://share.google/Wph2iCoxWyBdeHHX0",
+      "redirectMode": "timed",
+      "redirectDelay": 1,
+      "buttons": [
+        {
+          "title": "Watch Full Video",
+          "url": "https://share.google/Wph2iCoxWyBdeHHX0"
+        }
+      ],
+      "videos": [
+        {
+          "image": "/part4-video-full/preview.jpg"
+        }
+      ]
+    }
+  }
+}
