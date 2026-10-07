@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bio Manager — Admin</title>
+<style>
+:root{--bg:#070910;--panel:#101522;--panel2:#0c111c;--stroke:#273249;--text:#f8fafc;--muted:#8f9bb0;--purple:#8b5cf6;--pink:#ec4899;--cyan:#22d3ee;--blue:#3b82f6}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:radial-gradient(circle at 5% 0%,rgba(139,92,246,.18),transparent 26%),radial-gradient(circle at 95% 8%,rgba(236,72,153,.12),transparent 26%),linear-gradient(145deg,#090d17,#070910 62%);color:var(--text);font:14px/1.5 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{width:min(1220px,100%);margin:auto;padding:30px 18px 80px}.hidden{display:none!important}
+.card{position:relative;background:linear-gradient(145deg,rgba(17,23,36,.96),rgba(12,17,28,.96));border:1px solid rgba(255,255,255,.09);border-radius:22px;padding:20px;box-shadow:0 18px 48px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.025)}
+.login{max-width:430px;margin:11vh auto 0;padding:26px}
+.login:before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:linear-gradient(135deg,rgba(139,92,246,.65),rgba(236,72,153,.35),rgba(34,211,238,.45));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.shell{display:grid;grid-template-columns:290px 1fr;gap:20px}.sidebar{position:sticky;top:18px;align-self:start}
+.brand{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:16px}
+h1,h2,h3{margin:0;letter-spacing:-.35px}.muted{color:var(--muted)}.pages{display:grid;gap:9px;margin-top:15px}
+.pageitem{position:relative;padding:12px 13px;border:1px solid #273147;border-radius:15px;background:linear-gradient(145deg,#0d1320,#0a0f19);cursor:pointer;transition:.18s ease}
+.pageitem:hover{transform:translateY(-1px);border-color:#3a4866}.pageitem.active{border-color:rgba(139,92,246,.75);background:linear-gradient(145deg,rgba(139,92,246,.16),rgba(34,211,238,.06));box-shadow:0 10px 25px rgba(92,60,190,.14)}
+.pageitem strong{display:block}.pageitem small{color:#91a0b8}
+.top{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:17px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.full{grid-column:1/-1}
+label{display:block;font-size:12px;font-weight:850;color:#cbd5e1;margin:0 0 7px}
+input,textarea,select{width:100%;padding:13px 14px;border-radius:14px;border:1px solid #2a354c;background:linear-gradient(145deg,#0b101a,#0a0f18);color:#fff;outline:none;transition:border-color .18s ease,box-shadow .18s ease,background .18s ease}
+input:focus,textarea:focus{border-color:#7c68e8;box-shadow:0 0 0 3px rgba(139,92,246,.11);background:#0c111c}
+textarea{min-height:96px;resize:vertical}
+button{border:1px solid transparent;border-radius:14px;padding:11px 15px;font-weight:850;cursor:pointer;transition:transform .16s ease,box-shadow .16s ease,background .16s ease}
+button:hover{transform:translateY(-1px)}button:active{transform:scale(.98)}
+.primary{background:linear-gradient(135deg,#8b5cf6,#ec4899);color:#fff;box-shadow:0 10px 24px rgba(139,92,246,.23)}
+.secondary{background:linear-gradient(145deg,#202b40,#182235);border-color:#303c55;color:#fff}
+.danger{background:linear-gradient(145deg,#3a1723,#28121a);border-color:#55202f;color:#ff9fb3}
+.btnrow{display:flex;gap:9px;flex-wrap:wrap}.section{margin-bottom:19px}
+.linkitem{position:relative;padding:14px;border:1px solid #29364e;border-radius:17px;background:linear-gradient(145deg,#0d1421,#0b111b);margin-top:10px;box-shadow:inset 0 1px 0 rgba(255,255,255,.02)}
+.linkitem:before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:3px;border-radius:999px;background:linear-gradient(#8b5cf6,#ec4899,#22d3ee)}
+.linkgrid{display:grid;grid-template-columns:1fr 1.45fr auto;gap:10px;align-items:end}.status{min-height:22px;color:#a5b0c3;margin-top:11px}
+.slugpreview{font-size:13px;color:#aab4c6;margin-top:7px;word-break:break-all}
+#saveBtn{min-width:155px}.videoitem:before{background:linear-gradient(#22d3ee,#3b82f6,#8b5cf6)}
+@media(max-width:850px){.shell{grid-template-columns:1fr}.sidebar{position:static}.grid,.linkgrid{grid-template-columns:1fr}.full{grid-column:auto}.top{align-items:flex-start;flex-direction:column}}
+</style></head><body><div class="wrap">
+<section id="login" class="card login">
+  <h1>Admin Login</h1><p class="muted">Bio page manager</p>
+  <label>Password</label><input id="password" type="password" placeholder="Admin password">
+  <div style="height:12px"></div><button id="loginBtn" class="primary">Login</button><div id="loginStatus" class="status"></div>
+</section>
+
+<section id="app" class="hidden">
+<div class="shell">
+<aside class="card sidebar">
+  <div class="brand"><div><h2>Bio Pages</h2><div class="muted"><span id="adminHost"></span></div></div><button id="newBtn" class="primary">+ New</button></div>
+  <div id="pagesList" class="pages"></div>
+  <div style="height:14px"></div>
+  <button id="logoutBtn" class="secondary" style="width:100%">Logout</button>
+</aside>
+
+<main>
+  <div id="empty" class="card"><h2>No page selected</h2><p class="muted">Create a new bio page from the left.</p></div>
+
+  <div id="editor" class="hidden">
+    <div class="top">
+      <div><h1 id="editorTitle">Edit Bio Page</h1><div id="liveUrl" class="slugpreview"></div></div>
+      <div class="btnrow"><button id="openBtn" class="secondary">Open Page ↗</button><button id="deleteBtn" class="danger">Delete</button></div>
+    </div>
+
+    <div class="card section"><h3>Link & Redirect</h3><div style="height:12px"></div><div class="grid">
+      <div><label>Slug</label><input id="slug" placeholder="amina-whatsapp"><div class="slugpreview"><span id="slugOrigin"></span>/<span id="slugText">...</span></div></div>
+      <div><label>Redirect Mode</label><select id="redirectMode"><option value="timed">Timed Redirect</option><option value="302">Instant 302 Redirect</option></select></div><div><label>Redirect delay (seconds)</label><input id="redirectDelay" type="number" min="0" step="0.1" value="3" placeholder="e.g. 0, 2.5, 10, 60"></div>
+      <div class="full"><label>Main destination URL</label><input id="destinationUrl" type="url" placeholder="https://destination.com/..."></div>
+    </div></div>
+
+    <div class="card section"><h3>Profile (optional)</h3><div style="height:12px"></div><div class="grid">
+      <div><label>Name</label><input id="name" placeholder="Amina"></div>
+      <div><label>Username</label><input id="username" placeholder="@amina"></div>
+      <div class="full"><label>Bio</label><textarea id="bio" placeholder="Short bio..."></textarea></div>
+      <div class="full"><label>Profile Image URL</label><input id="profileImage" type="text" placeholder="https://..."></div>
+      <div class="full"><label>Background Image URL</label><input id="backgroundImage" type="text" placeholder="https://..."></div>
+    </div></div>
+
+    <div class="card section"><h3>Social Preview (optional)</h3><div style="height:12px"></div><div class="grid">
+      <div class="full"><label>OG Title</label><input id="ogTitle"></div>
+      <div class="full"><label>OG Description</label><textarea id="ogDescription"></textarea></div>
+      <div class="full"><label>OG Image URL</label><input id="ogImage" type="text" placeholder="https://..."></div>
+    </div></div>
+
+    <div class="card section">
+      <div class="top" style="margin:0"><div><h3>Buttons (optional)</h3><div class="muted">Each button can have its own destination.</div></div><button id="addButton" class="secondary">+ Add Button</button></div>
+      <div id="buttons"></div>
+    </div>
+
+    <div class="card section">
+      <div class="top" style="margin:0"><div><h3>Videos (optional)</h3><div class="muted">Paste only thumbnail/image URLs. Play icon is automatic; click uses the main destination URL.</div></div><button id="addVideo" class="secondary">+ Add Video</button></div>
+      <div id="videos"></div>
+    </div>
+
+    <div class="card">
+      <div class="btnrow"><button id="saveBtn" class="primary">Save All Changes</button><button id="reloadBtn" class="secondary">Reload</button></div>
+      <div id="status" class="status"></div>
+    </div>
+  </div>
+</main>
+</div>
+</section>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+let password=sessionStorage.getItem("narsfun_admin_password")||"";
+let db={pages:{}}; let selected=null; let originalSlug=null; let persistedSlugs=new Set();
+const RESERVED_SLUGS=new Set(["admin","api","404","favicon.ico","robots.txt","sitemap.xml","assets","functions"]);
+const makePageId=()=>{try{return crypto.randomUUID()}catch{return "page-"+Date.now()+"-"+Math.random().toString(36).slice(2)}};
+
+const blankPage=()=>({pageId:makePageId(),name:"",username:"",bio:"",profileImage:"",backgroundImage:"",ogTitle:"",ogDescription:"",ogImage:"",destinationUrl:"",redirectMode:"timed",redirectDelay:3,buttons:[],videos:[]});
+const cleanSlug=s=>String(s||"").toLowerCase().trim().replace(/[^a-z0-9-]+/g,"-").replace(/^-+|-+$/g,"").slice(0,80);
+const esc=s=>String(s||"").replaceAll("&","&amp;").replaceAll('"',"&quot;").replaceAll("<","&lt;").replaceAll(">","&gt;");
+
+async function verifyPassword(){
+  const r=await fetch("/api/auth",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({password})});
+  const d=await r.json().catch(()=>({}));
+  if(!r.ok) throw new Error(d.error||"Wrong password");
+}
+async function load(){
+  const r=await fetch("/api/config",{cache:"no-store"}); const d=await r.json();
+  if(!r.ok) throw new Error(d.error||"Could not load pages");
+  db=d.pages?d:{pages:{}};
+  for(const [slug,p] of Object.entries(db.pages)){if(!p.pageId)p.pageId="legacy:"+slug}
+  persistedSlugs=new Set(Object.keys(db.pages));
+  renderList();
+}
+function renderList(){
+  const box=$("pagesList"); box.innerHTML="";
+  const slugs=Object.keys(db.pages||{}).sort();
+  if(!slugs.length){box.innerHTML='<div class="muted">No bio pages yet.</div>';return}
+  for(const slug of slugs){
+    const p=db.pages[slug]||{}; const el=document.createElement("div");
+    el.className="pageitem"+(selected===slug?" active":"");
+    el.innerHTML="<strong>"+esc(p.name||slug)+"</strong><small>/"+esc(slug)+"</small>";
+    el.onclick=()=>selectPage(slug); box.appendChild(el);
+  }
+}
+function selectPage(slug){
+  selected=slug; originalSlug=slug;
+  const p=db.pages[slug]||blankPage(); if(!p.pageId)p.pageId="legacy:"+slug;
+  $("empty").classList.add("hidden"); $("editor").classList.remove("hidden");
+  $("slug").value=slug;
+  ["name","username","bio","profileImage","backgroundImage","ogTitle","ogDescription","ogImage","destinationUrl","redirectDelay"].forEach(k=>$(k).value=p[k]??""); $("redirectMode").value=p.redirectMode||"timed"; toggleDelay();
+  renderButtons(p.buttons||[]); renderVideos(p.videos||[]); updateUrl(); renderList();
+}
+function renderButtons(items){
+  $("buttons").innerHTML=""; items.forEach(b=>addButton(b.title,b.url));
+}
+function addButton(title="",url=""){
+  const el=document.createElement("div"); el.className="linkitem";
+  el.innerHTML='<div class="linkgrid"><div><label>Button title</label><input class="bt-title" value="'+esc(title)+'" placeholder="Watch Now"></div><div><label>Destination URL</label><input class="bt-url" type="url" value="'+esc(url)+'" placeholder="https://..."></div><div class="btnrow"><button class="secondary up">↑</button><button class="secondary down">↓</button><button class="danger del">Delete</button></div></div>';
+  el.querySelector(".del").onclick=()=>el.remove();
+  el.querySelector(".up").onclick=()=>{const p=el.previousElementSibling;if(p)$("buttons").insertBefore(el,p)};
+  el.querySelector(".down").onclick=()=>{const n=el.nextElementSibling;if(n)$("buttons").insertBefore(n,el)};
+  $("buttons").appendChild(el);
+}
+function renderVideos(items){
+  $("videos").innerHTML=""; items.forEach(v=>addVideo(v.image));
+}
+function addVideo(image=""){
+  const el=document.createElement("div"); el.className="linkitem videoitem";
+  el.innerHTML='<div class="linkgrid" style="grid-template-columns:1fr auto"><div><label>Thumbnail / Image URL</label><input class="video-image" type="text" value="'+esc(image)+'" placeholder="https://..."></div><div class="btnrow"><button class="secondary up">↑</button><button class="secondary down">↓</button><button class="danger del">Delete</button></div></div>';
+  el.querySelector(".del").onclick=()=>el.remove();
+  el.querySelector(".up").onclick=()=>{const p=el.previousElementSibling;if(p)$("videos").insertBefore(el,p)};
+  el.querySelector(".down").onclick=()=>{const n=el.nextElementSibling;if(n)$("videos").insertBefore(n,el)};
+  $("videos").appendChild(el);
+}
+function collect(){
+  return {
+    pageId:(db.pages[originalSlug||selected]?.pageId||db.pages[selected]?.pageId||makePageId()),
+    name:$("name").value,username:$("username").value,bio:$("bio").value,profileImage:$("profileImage").value,backgroundImage:$("backgroundImage").value,
+    ogTitle:$("ogTitle").value,ogDescription:$("ogDescription").value,ogImage:$("ogImage").value,
+    destinationUrl:$("destinationUrl").value,redirectMode:$("redirectMode").value,redirectDelay:(()=>{const n=Number($("redirectDelay").value);return Number.isFinite(n)&&n>=0?n:3})(),
+    buttons:[...document.querySelectorAll("#buttons .linkitem")].map(el=>({title:el.querySelector(".bt-title").value,url:el.querySelector(".bt-url").value})),
+    videos:[...document.querySelectorAll(".videoitem")].map(el=>({image:el.querySelector(".video-image").value}))
+  };
+}
+function slugProblem(slug){
+  if(!slug)return "Slug is required.";
+  if(RESERVED_SLUGS.has(slug))return "This slug is reserved.";
+  if(slug!==originalSlug && db.pages[slug])return "This slug is already used by another page.";
+  if(slug!==originalSlug && persistedSlugs.has(slug))return "This slug is still reserved by a saved page. Delete that page and save first.";
+  return "";
+}
+function updateUrl(){
+  const s=cleanSlug($("slug").value);
+  $("slugText").textContent=s||"...";
+  $("liveUrl").textContent=s?location.origin+"/"+s:"";
+  const problem=slugProblem(s);
+  $("slug").style.borderColor=problem?"#ef476f":"";
+  $("slug").title=problem||"Slug available";
+}
+function newPage(){
+  let base="new-page", slug=base, i=2; while(db.pages[slug]) slug=base+"-"+i++;
+  db.pages[slug]=blankPage(); selectPage(slug); $("slug").focus();
+}
+function deletePage(){
+  if(!selected)return;
+  if(!confirm("Delete /"+selected+" ?"))return;
+  delete db.pages[selected]; selected=null; originalSlug=null;
+  $("editor").classList.add("hidden"); $("empty").classList.remove("hidden"); renderList(); $("status").textContent="Page removed locally. Click Save All Changes to publish.";
+}
+async function saveAll(){
+  if(selected){
+    const newSlug=cleanSlug($("slug").value);
+    const problem=slugProblem(newSlug);
+    if(problem)return $("status").textContent="❌ "+problem;
+    const page=collect();
+    if(originalSlug && originalSlug!==newSlug) delete db.pages[originalSlug];
+    db.pages[newSlug]=page; selected=newSlug; originalSlug=newSlug;
+  }
+  $("saveBtn").disabled=true; $("status").textContent="Saving…";
+  try{
+    const r=await fetch("/api/save",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({password,pages:db.pages})});
+    const raw=await r.text(); let d={}; try{d=JSON.parse(raw)}catch{throw new Error("Server returned non-JSON ("+r.status+"): "+raw.slice(0,180).replace(/\\s+/g," "))} if(!r.ok) throw new Error((d.error||"Save failed")+(d.detail?" — "+d.detail:""));
+    if(!d.verified) throw new Error("Server did not verify the saved changes.");
+    $("status").textContent="✅ Saved successfully.";
+    await load();
+    if(selected&&db.pages[selected]) selectPage(selected);
+    else if(selected) throw new Error("Save response succeeded but page is missing after reload.");
+    renderList();
+  }catch(e){$("status").textContent="❌ "+e.message}
+  finally{$("saveBtn").disabled=false}
+}
+async function login(){
+  password=$("password").value;
+  if(!password)return $("loginStatus").textContent="Enter your password.";
+  $("loginStatus").textContent="Checking…";
+  try{
+    await verifyPassword(); sessionStorage.setItem("narsfun_admin_password",password);
+    $("login").classList.add("hidden"); $("app").classList.remove("hidden");
+    await load(); $("loginStatus").textContent="";
+  }catch(e){$("loginStatus").textContent="❌ "+e.message}
+}
+$("loginBtn").onclick=login; $("password").addEventListener("keydown",e=>{if(e.key==="Enter")login()});
+$("logoutBtn").onclick=()=>{sessionStorage.removeItem("narsfun_admin_password");location.reload()};
+$("newBtn").onclick=newPage; $("addButton").onclick=()=>addButton(); $("addVideo").onclick=()=>addVideo(); $("deleteBtn").onclick=deletePage; $("saveBtn").onclick=saveAll;
+$("reloadBtn").onclick=()=>load().then(()=>{if(selected&&db.pages[selected])selectPage(selected)}).catch(e=>$("status").textContent="❌ "+e.message);
+function toggleDelay(){const instant=$("redirectMode").value==="302";$("redirectDelay").disabled=instant;$("redirectDelay").style.opacity=instant?".45":"1"} $("redirectMode").addEventListener("change",toggleDelay); $("slug").addEventListener("input",updateUrl);
+$("openBtn").onclick=()=>{const s=cleanSlug($("slug").value); if(s) window.open("/"+s,"_blank")};
+
+if(password){
+  $("password").value=password;
+  verifyPassword().then(()=>{$("login").classList.add("hidden");$("app").classList.remove("hidden");return load()}).catch(()=>{sessionStorage.removeItem("narsfun_admin_password");password=""});
+}
+$("adminHost").textContent=location.host;
+$("slugOrigin").textContent=location.origin;
+</script></body></html>
