@@ -23,7 +23,9 @@
         {
           "image": "/part4-video-full/preview.jpg"
         }
-      ]
+      ],
+      "ogImageWidth": 1200,
+      "ogImageHeight": 630
     }
   }
 }
