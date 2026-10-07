@@ -21,3 +21,5 @@ Cloudflare Pages bio-link project for `nars.fun`.
 The build preserves the original `/part4-video-full/preview.jpg` and verifies its SHA-256 before deployment.
 The seeded `/part4-video-full` page keeps the original 1-second redirect to:
 `https://share.google/Wph2iCoxWyBdeHHX0`.
+
+Syntax check: passed for `functions/[slug].js`.
