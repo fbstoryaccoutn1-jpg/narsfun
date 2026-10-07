@@ -17,15 +17,17 @@
         {
           "title": "Watch Full Video",
           "url": "https://share.google/Wph2iCoxWyBdeHHX0"
+        },
+        {
+          "title": "Whatsapp",
+          "url": "https://share.google/Wph2iCoxWyBdeHHX0"
         }
       ],
       "videos": [
         {
           "image": "/part4-video-full/preview.jpg"
         }
-      ],
-      "ogImageWidth": 1200,
-      "ogImageHeight": 630
+      ]
     }
   }
 }
