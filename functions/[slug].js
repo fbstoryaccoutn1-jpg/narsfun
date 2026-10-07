@@ -99,13 +99,13 @@ export async function onRequestGet({params,env,request}){
   const videos=(Array.isArray(c.videos)?c.videos:[]).map((v,i)=>`<a class="video-card video-tone-${(i%4)+1}" href="${esc(dest||"#")}" target="_self" aria-label="Video ${i+1}"><img src="${esc(normalizeImageUrl(v.image||"",origin))}" alt="Video thumbnail ${i+1}" loading="lazy" onerror="this.style.display=\'none\';this.parentElement.classList.add(\'img-failed\')"><span class="video-shine"></span><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7L8 5Z"/></svg></span><span class="video-badge">VIDEO</span></a>`).join("");
   const title=esc(c.ogTitle||c.name||"Bio");
   const desc=esc(c.ogDescription||c.bio||"");
-  const og=esc(normalizeImageUrl(c.ogImage||c.profileImage||"",origin));
+  const og=esc(normalizeImageUrl(c.ogImage||c.profileImage||"",origin));\n  const ogWidth=Number(c.ogImageWidth)||400; const ogHeight=Number(c.ogImageHeight)||400;
   const bg=c.backgroundImage?`background-image:linear-gradient(180deg,rgba(7,10,18,.48),rgba(7,10,18,.90)),url('${esc(normalizeImageUrl(c.backgroundImage,origin))}');`:"";
   const redirectScript=dest?`<script>(()=>{const delay=${delay};const target=${JSON.stringify(dest)};const el=document.getElementById("count");if(delay<=0){location.replace(target);return}const started=performance.now();const finish=started+delay*1000;const draw=()=>{const left=Math.max(0,(finish-performance.now())/1000);if(el)el.textContent=left>=10?Math.ceil(left):left.toFixed(1).replace(/\\.0$/,"");if(left>0)requestAnimationFrame(draw)};draw();setTimeout(()=>location.replace(target),delay*1000)})();</script>`:"";
   const html=`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>${title}</title><meta name="description" content="${desc}">
 <meta property="og:type" content="website"><meta property="og:url" content="${origin}/${esc(slug)}"><meta property="og:title" content="${title}"><meta property="og:description" content="${desc}"><meta property="og:image" content="${og}">
-<meta property="og:image:width" content="400"><meta property="og:image:height" content="400">
+<meta property="og:image:width" content="${ogWidth}"><meta property="og:image:height" content="${ogHeight}">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${title}"><meta name="twitter:description" content="${desc}"><meta name="twitter:image" content="${og}">
 <style>
 :root{--bg:#070910;--purple:#8b5cf6;--pink:#ec4899;--cyan:#22d3ee}
