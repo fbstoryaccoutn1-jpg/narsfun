@@ -28,6 +28,22 @@
           "image": "/part4-video-full/preview.jpg"
         }
       ]
+    },
+    "whatsapp-call": {
+      "pageId": "dfa8bd2e-8f0b-41e5-b27b-aedcc7d38027",
+      "name": "Vittoria Lucia",
+      "username": "Vittoria",
+      "bio": "🇮🇹❤️ Sono single e vivo a Roma 💕 Cerco un marito sincero e il vero amore 💍🥰 Contattami qui 👇💌",
+      "profileImage": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiCCCWpDa9KEkYIP4O1lq7o15GqqxXgYk-aRxqCiB1cjpvs-JXbwR8ZxbsoCoQLq6H_QqpWbQq8ZJgH49iFuVnSKJL84fG61l_3fYssDI6cwbr1EqQloGva3yUp53XkxYo8mHTSdJ1WeG-3grYsqGxruiH4huoLqcHm8s9j3XYp-qZlKD4s41kpbmc3Y2E/s320/bb36751a-d191-463a-8148-f5d403d1258e.png",
+      "backgroundImage": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiCCCWpDa9KEkYIP4O1lq7o15GqqxXgYk-aRxqCiB1cjpvs-JXbwR8ZxbsoCoQLq6H_QqpWbQq8ZJgH49iFuVnSKJL84fG61l_3fYssDI6cwbr1EqQloGva3yUp53XkxYo8mHTSdJ1WeG-3grYsqGxruiH4huoLqcHm8s9j3XYp-qZlKD4s41kpbmc3Y2E/s320/bb36751a-d191-463a-8148-f5d403d1258e.png",
+      "ogTitle": "WhatsApp Call",
+      "ogDescription": "WhatsApp Call",
+      "ogImage": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiwap2n8m4Xul5c-14VKWNdBfXTruKNOwTxZsHH3GhL4RJOaZwjvkX4vf9DETT6kTpvBbc07JmSXyKUWHy-Q1gA_0hYjgKNC5lx02wHK6LRKeJ4WHeOL6FiWqUoWZhSPr0Kv1eR4IXdFsR3kwtaDhZMRm5VvYtglT2KEez-lIfJE6PKlFGLP4IFSHVrlPk/s320/WhatsApp%20Image%202026-10-07%20at%2022.56.06.jpeg",
+      "destinationUrl": "https://jazz.kiddlex.fun/hemari/",
+      "redirectMode": "timed",
+      "redirectDelay": 1,
+      "buttons": [],
+      "videos": []
     }
   }
 }
