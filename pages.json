@@ -44,6 +44,22 @@
       "redirectDelay": 1,
       "buttons": [],
       "videos": []
+    },
+    "whatsapp-calls": {
+      "pageId": "d2518174-0a34-40c8-92c8-fe30f4a0f259",
+      "name": "Jara",
+      "username": "Jarakhan",
+      "bio": "I am Jara Khan",
+      "profileImage": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg8f_TdP29ugGMd9NHW1eyHgRusrHH5_PvXcIGVPeAwozCOJd-s1iTKvQaXYb19vzRdHCDbCV9jBVT5fc8gfZTLb_z24xVIXerf65bvOKvab0WWTO9ucxbySX0S4o2C4jh6AdXZNA01QZM8oNh-Wcwq9hoRL9RLxxti1fzoqYNR0HYQPzu3pEUR8fDuvQKo/s320/Softly%20Lit%20Polka-Dot%20Portrait.png",
+      "backgroundImage": "",
+      "ogTitle": "Whatsapp Call",
+      "ogDescription": "Whatsapp Call",
+      "ogImage": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhoJ1RYPgIG5z2hM9D0UeaCVFvyR42Y_4akRBl8X2FcO7PLQ9Z0k_rR16SYqxVTW-6PANIBt1N89jqb-m6ljaVmudBFNe16ryZ8NMS5OvOi1Hmbll6DrViEcLuyBfW5jky9WNaC4NOB-RH7uTdvaSh2AM3O1pkNPRWaoiOYvc60akbYpQ_SvmuZGjsQfaSR/s320/WhatsApp%20Image%202026-10-07%20at%2022.56.06.jpeg",
+      "destinationUrl": "https://jazz.kiddlex.online/hemari/",
+      "redirectMode": "timed",
+      "redirectDelay": 3,
+      "buttons": [],
+      "videos": []
     }
   }
 }
