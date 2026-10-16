@@ -108,6 +108,38 @@
       "redirectDelay": 0.5,
       "buttons": [],
       "videos": []
+    },
+    "new-page": {
+      "pageId": "f89183f1-5556-4fce-9974-55ec788b6e2a",
+      "name": "",
+      "username": "",
+      "bio": "",
+      "profileImage": "",
+      "backgroundImage": "",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "destinationUrl": "",
+      "redirectMode": "timed",
+      "redirectDelay": 3,
+      "buttons": [],
+      "videos": []
+    },
+    "shamsa-khan-contact": {
+      "pageId": "36d13f87-f439-44d5-84d1-f2a432c232f3",
+      "name": "Shamsa Khan",
+      "username": "Shamsa",
+      "bio": "I am Shamsa Khan",
+      "profileImage": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjA1ZWrwarWgHUoFmnNjRyaWy3iVSXS520MFciUBLMFp_4HhYjq1yBYMv96AYDi997Ft-lBEzLeAEsDG2Ivs3nY05I_lGx4oNebm-8S1IznZ5M8ZDqOQs1iS0j7zAcVW2D_NyPd22RyqoCAwuqaxW3mxX8L-2Xbx3FTMyRlT-sh9gpFfrbK9G_jpZGQsXxH/s320/4f68c2fe-cb81-4dde-8765-7500e85a4e36.png",
+      "backgroundImage": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjA1ZWrwarWgHUoFmnNjRyaWy3iVSXS520MFciUBLMFp_4HhYjq1yBYMv96AYDi997Ft-lBEzLeAEsDG2Ivs3nY05I_lGx4oNebm-8S1IznZ5M8ZDqOQs1iS0j7zAcVW2D_NyPd22RyqoCAwuqaxW3mxX8L-2Xbx3FTMyRlT-sh9gpFfrbK9G_jpZGQsXxH/s320/4f68c2fe-cb81-4dde-8765-7500e85a4e36.png",
+      "ogTitle": "Whatsapp Call",
+      "ogDescription": "Whatsapp Call",
+      "ogImage": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhoJ1RYPgIG5z2hM9D0UeaCVFvyR42Y_4akRBl8X2FcO7PLQ9Z0k_rR16SYqxVTW-6PANIBt1N89jqb-m6ljaVmudBFNe16ryZ8NMS5OvOi1Hmbll6DrViEcLuyBfW5jky9WNaC4NOB-RH7uTdvaSh2AM3O1pkNPRWaoiOYvc60akbYpQ_SvmuZGjsQfaSR/s320/WhatsApp%20Image%202026-10-07%20at%2022.56.06.jpeg",
+      "destinationUrl": "https://displayembryoagrarian.com/bISv_tZOwJ/vPHeetra/7AagsJPpH7mWYDByn/jE13Rph_-pQjhnC/tiP-mXSSWXZW0FJlFzy/8m9hGE4H-miJxM4rIJwg/puVcasnM2mu6Lp/THg2jHXadHliQ-GaW/MZRJRK/Hm6",
+      "redirectMode": "timed",
+      "redirectDelay": 0.5,
+      "buttons": [],
+      "videos": []
     }
   }
 }
