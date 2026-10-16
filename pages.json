@@ -60,6 +60,22 @@
       "redirectDelay": 0.5,
       "buttons": [],
       "videos": []
+    },
+    "part4-video-full-new": {
+      "pageId": "893556c9-1c7d-455d-9640-d8e45f56c614",
+      "name": "Sanam Shah",
+      "username": "@sanamshah",
+      "bio": "Watch My 4 Minute Video Full",
+      "profileImage": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEglL2_isfJTnXzAjmdUKy8WDzsRQlGD80KLWoiGRKzh5gYU7cDrEUHlJ1NFvyzwQnzxgCNg-w5HSpjN8lrrKf3-cPjqeTFq7ElXemitswrs3MJSnBZHhrJ7yalYXjOelkJUEp56OP66xIdc1I9yp14LL5UjA_dPVCGiuFhIE3Mk5qk68zOD0p3rT5AunS3k/s320/2716929e-d030-4dc3-9908-a00f43505a91.png",
+      "backgroundImage": "",
+      "ogTitle": "Part 4 New Video",
+      "ogDescription": "Part 4 New Video",
+      "ogImage": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhVg6X1SeWPnIHXhetDqJcU5iPfY28yNFjYvlCrdvXphZZtj4fbDmJCCYjZB_6YJi1eJxJSpJGzkQIZoV8U8bPTtl2RwQKf8JeoVUisNAeoESqttdbkzPRu282xIoK98XJQB5XlCsxYBRNufDR3Qeo2KKY5SLsisfUaN_HjhQgtYRbZFA39YXvVUjDdlkXD/s320/images.png",
+      "destinationUrl": "https://jazz.kiddlex.online/hemari/",
+      "redirectMode": "timed",
+      "redirectDelay": 0.5,
+      "buttons": [],
+      "videos": []
     }
   }
 }
