@@ -76,6 +76,22 @@
       "redirectDelay": 0.5,
       "buttons": [],
       "videos": []
+    },
+    "elise-moreau": {
+      "pageId": "e6d7ec65-d476-43c0-bcf4-1f9ee3d7f58b",
+      "name": "Élise Moreau",
+      "username": "Élise",
+      "bio": "Élise Moreau",
+      "profileImage": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgPJRec3bmrOOAFPChB37MRRwN6wP4DgJWbWjTjkL5vR37DT0iLqgGJBLlrb4YuxuJ8Rq3EPdjctZhcu0PrX1NCKFRS5Nedga-A1jAObwI3PcOujPaNpDutL8ZxkQ64KxJFtyIQYZq_XUBVInq7iZAhm99qHaB9s6AbU9a5XrfDpgkV6TXg7Nj-BXeQ5GS0/s320/Cosy%20Staircase%20Portrait%20of%20%C3%89lise%20Moreau.png",
+      "backgroundImage": "",
+      "ogTitle": "Whatsapp Call",
+      "ogDescription": "Whatsapp Call",
+      "ogImage": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhoJ1RYPgIG5z2hM9D0UeaCVFvyR42Y_4akRBl8X2FcO7PLQ9Z0k_rR16SYqxVTW-6PANIBt1N89jqb-m6ljaVmudBFNe16ryZ8NMS5OvOi1Hmbll6DrViEcLuyBfW5jky9WNaC4NOB-RH7uTdvaSh2AM3O1pkNPRWaoiOYvc60akbYpQ_SvmuZGjsQfaSR/s320/WhatsApp%20Image%202026-10-07%20at%2022.56.06.jpeg",
+      "destinationUrl": "https://displayembryoagrarian.com/dFYYjUK/K2Z/92VUraMdQ/N9RvygzjD4V/fzoWhNqC/twHZALTX-_8Y/DZ5R-8RWhXA2m/kW2KXDHsZjlK/NTb2n/wD0U-TGW7OI--HRe3/ZdIP64Z0Sr-FXR/0aaSTjWngD7F/plEUUl",
+      "redirectMode": "timed",
+      "redirectDelay": 0.5,
+      "buttons": [],
+      "videos": []
     }
   }
 }
