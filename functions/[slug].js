@@ -1,3 +1,106 @@
+import bundledConfig from "../pages.json";
+
+const CONFIG_FRESH_MS = 60000;
+const CONFIG_RETRY_MS = 30000;
+const CONFIG_TIMEOUT_MS = 3500;
+const CONFIG_STALE_SECONDS = 604800;
+let memoryConfig = null;
+let refreshPromise = null;
+let nextRetryAt = 0;
+
+function validConfig(db) {
+  return db !== null && typeof db === "object" && !Array.isArray(db) && db.pages !== null && typeof db.pages === "object" && !Array.isArray(db.pages);
+}
+function configCacheKey(request) {
+  const url = new URL(request.url);
+  url.pathname = "/__internal_bio_config_v2";
+  url.search = "";
+  return new Request(url.toString(), { method: "GET" });
+}
+async function readEdgeConfig(request) {
+  if (typeof caches === "undefined" || !caches.default) return null;
+  try {
+    const hit = await caches.default.match(configCacheKey(request));
+    if (!hit) return null;
+    const entry = await hit.json();
+    if (entry && validConfig(entry.config) && Number.isFinite(entry.fetchedAt)) return entry;
+  } catch (error) {
+    console.warn("[bio-config] cache_read_failed " + String(error));
+  }
+  return null;
+}
+async function saveEdgeConfig(request, entry) {
+  if (typeof caches === "undefined" || !caches.default) return;
+  try {
+    await caches.default.put(configCacheKey(request),
+      new Response(JSON.stringify(entry), {
+        headers: { "Content-Type": "application/json", "Cache-Control": "public, max-age=" + CONFIG_STALE_SECONDS }
+      })
+    );
+  } catch (error) {
+    console.warn("[bio-config] cache_write_failed " + String(error));
+  }
+}
+async function fetchGitHubConfig(env) {
+  if (!env.GITHUB_OWNER || !env.GITHUB_REPO) throw new Error("GitHub environment configuration is missing");
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), CONFIG_TIMEOUT_MS);
+  try {
+    const branch = env.GITHUB_BRANCH || "main";
+    const headers = { "Accept": "application/vnd.github+json", "User-Agent": "bio-pages-config", "Cache-Control": "no-cache" };
+    if (env.GITHUB_TOKEN) headers.Authorization = "Bearer " + env.GITHUB_TOKEN;
+    const apiPath = "/repos/" + encodeURIComponent(env.GITHUB_OWNER) + "/" + encodeURIComponent(env.GITHUB_REPO) + "/contents/pages.json?ref=" + encodeURIComponent(branch) + "&t=" + Date.now();
+    const response = await fetch("https://api.github.com" + apiPath, { headers, signal: controller.signal });
+    if (!response.ok) throw new Error("GitHub returned HTTP " + response.status);
+    const json = await response.json();
+    const encoded = String(json.content || "").replace(/\s/g, "");
+    const bytes = Uint8Array.from(atob(encoded), char => char.charCodeAt(0));
+    const config = JSON.parse(new TextDecoder().decode(bytes));
+    if (!validConfig(config)) throw new Error("Invalid GitHub config structure");
+    return config;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+async function refreshConfig(env, request) {
+  if (refreshPromise) return refreshPromise;
+  refreshPromise = (async () => {
+    try {
+      const config = await fetchGitHubConfig(env);
+      const entry = { config, fetchedAt: Date.now() };
+      memoryConfig = entry;
+      nextRetryAt = 0;
+      await saveEdgeConfig(request, entry);
+      return entry;
+    } catch (error) {
+      nextRetryAt = Date.now() + CONFIG_RETRY_MS;
+      console.error("[bio-config] github_refresh_failed repo=" + (env.GITHUB_REPO || "unknown") + " reason=" + String(error && error.message || error));
+      return null;
+    } finally {
+      refreshPromise = null;
+    }
+  })();
+  return refreshPromise;
+}
+async function loadConfigCached(env, request, context) {
+  const now = Date.now();
+  if (!memoryConfig) memoryConfig = await readEdgeConfig(request);
+  if (memoryConfig && now - memoryConfig.fetchedAt < CONFIG_FRESH_MS) return memoryConfig.config;
+  if (memoryConfig) {
+    if (now >= nextRetryAt) {
+      const update = refreshConfig(env, request);
+      if (context && typeof context.waitUntil === "function") context.waitUntil(update);
+      else await update;
+    }
+    return memoryConfig.config;
+  }
+  const fresh = await refreshConfig(env, request);
+  if (fresh) return fresh.config;
+  console.warn("[bio-config] using bundled build snapshot repo=" + (env.GITHUB_REPO || "unknown"));
+  memoryConfig = { config: bundledConfig, fetchedAt: 0 };
+  return memoryConfig.config;
+}
+
 const GH_API="https://api.github.com";
 
 function esc(v=""){
@@ -74,21 +177,10 @@ function normalizeImageUrl(value="",origin=""){
   }catch{return s}
 }
 
-async function loadPages(env){
-  const branch=env.GITHUB_BRANCH||"main";
-  const headers={"Accept":"application/vnd.github+json","User-Agent":"narsfun-bio","Cache-Control":"no-cache"};
-  if(env.GITHUB_TOKEN) headers["Authorization"]="Bearer "+env.GITHUB_TOKEN;
-  const r=await fetch(`${GH_API}/repos/${encodeURIComponent(env.GITHUB_OWNER)}/${encodeURIComponent(env.GITHUB_REPO)}/contents/pages.json?ref=${encodeURIComponent(branch)}&t=${Date.now()}`,{headers});
-  if(!r.ok) throw new Error("Could not load pages.json ("+r.status+")");
-  const d=await r.json();
-  const raw=atob(d.content.replace(/\n/g,""));
-  const bytes=Uint8Array.from(raw,c=>c.charCodeAt(0));
-  return JSON.parse(new TextDecoder().decode(bytes));
-}
-export async function onRequestGet({params,env,request}){
+export async function onRequestGet({params,env,request,context}){
   const requestUrl=new URL(request.url); const origin=requestUrl.origin; const host=requestUrl.host;
   const slug=String(params.slug||"").toLowerCase();
-  let db; try{db=await loadPages(env)}catch{return new Response("Site configuration error.",{status:500,headers:{"content-type":"text/plain;charset=UTF-8","cache-control":"no-store"}})}
+  let db; try{db=await loadConfigCached(env,request,context)}catch{return new Response("Site configuration error.",{status:500,headers:{"content-type":"text/plain;charset=UTF-8","cache-control":"no-store"}})}
   const c=db.pages?.[slug];
   if(!c) return new Response('<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Page not found</title><style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#080b12;color:#fff;font-family:system-ui;text-align:center}.box{padding:28px}h1{margin:0 0 8px}</style></head><body><div class="box"><h1>Page not found</h1><p>This bio link does not exist.</p></div></body></html>',{status:404,headers:{"content-type":"text/html;charset=UTF-8","cache-control":"no-store"}});
   const rawDelay=Number(c.redirectDelay); const delay=Number.isFinite(rawDelay)&&rawDelay>=0?rawDelay:3;
