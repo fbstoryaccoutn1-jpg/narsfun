@@ -140,6 +140,22 @@
       "redirectDelay": 0.5,
       "buttons": [],
       "videos": []
+    },
+    "whatsapp-call": {
+      "pageId": "2c38f080-3b43-4f8f-9c28-03756a028dcc",
+      "name": "",
+      "username": "",
+      "bio": "",
+      "profileImage": "",
+      "backgroundImage": "",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "destinationUrl": "https://jazz.kiddlex.fun/hemari/",
+      "redirectMode": "timed",
+      "redirectDelay": 0.5,
+      "buttons": [],
+      "videos": []
     }
   }
 }
