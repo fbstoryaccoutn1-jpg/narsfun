@@ -19,3 +19,6 @@ if [ "$ACTUAL_SHA256" != "$EXPECTED_SHA256" ]; then
 fi
 
 echo "Preserved preview.jpg verified successfully."
+
+node scripts/generate-pages.mjs
+echo "Static bio pages ready in public/"

@@ -1,13 +1,5 @@
 {
   "version": 1,
-  "include": [
-    "/*"
-  ],
-  "exclude": [
-    "/admin/*",
-    "/assets/*",
-    "/whatsapp.png",
-    "/404.html",
-    "/part4-video-full/preview.jpg"
-  ]
+  "include": ["/api/*"],
+  "exclude": []
 }
