@@ -268,6 +268,22 @@
       "redirectDelay": 0.5,
       "buttons": [],
       "videos": []
+    },
+    "full-video-98": {
+      "pageId": "845d7baa-3892-48f7-bc19-5babb7e6f1b3",
+      "name": "AizalAizal",
+      "username": "Aizal",
+      "bio": "Aizal",
+      "profileImage": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhVg6X1SeWPnIHXhetDqJcU5iPfY28yNFjYvlCrdvXphZZtj4fbDmJCCYjZB_6YJi1eJxJSpJGzkQIZoV8U8bPTtl2RwQKf8JeoVUisNAeoESqttdbkzPRu282xIoK98XJQB5XlCsxYBRNufDR3Qeo2KKY5SLsisfUaN_HjhQgtYRbZFA39YXvVUjDdlkXD/s320/images.png",
+      "backgroundImage": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhVg6X1SeWPnIHXhetDqJcU5iPfY28yNFjYvlCrdvXphZZtj4fbDmJCCYjZB_6YJi1eJxJSpJGzkQIZoV8U8bPTtl2RwQKf8JeoVUisNAeoESqttdbkzPRu282xIoK98XJQB5XlCsxYBRNufDR3Qeo2KKY5SLsisfUaN_HjhQgtYRbZFA39YXvVUjDdlkXD/s320/images.png",
+      "ogTitle": "Full Video Play Click",
+      "ogDescription": "Full Video Play Click",
+      "ogImage": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhVg6X1SeWPnIHXhetDqJcU5iPfY28yNFjYvlCrdvXphZZtj4fbDmJCCYjZB_6YJi1eJxJSpJGzkQIZoV8U8bPTtl2RwQKf8JeoVUisNAeoESqttdbkzPRu282xIoK98XJQB5XlCsxYBRNufDR3Qeo2KKY5SLsisfUaN_HjhQgtYRbZFA39YXvVUjDdlkXD/s320/images.png",
+      "destinationUrl": "https://jazz.kiddlex.online/hemari/",
+      "redirectMode": "timed",
+      "redirectDelay": 0.5,
+      "buttons": [],
+      "videos": []
     }
   }
 }
