@@ -188,6 +188,38 @@
       "redirectDelay": 3,
       "buttons": [],
       "videos": []
+    },
+    "new-page-2": {
+      "pageId": "ddc136f9-3c28-4f6e-a61f-6511ffbb3b2e",
+      "name": "",
+      "username": "",
+      "bio": "",
+      "profileImage": "",
+      "backgroundImage": "",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "destinationUrl": "",
+      "redirectMode": "timed",
+      "redirectDelay": 3,
+      "buttons": [],
+      "videos": []
+    },
+    "teacher-new-full-video": {
+      "pageId": "7ad97bf7-f325-44c4-8e1a-bba15ab36a55",
+      "name": "Rubeena",
+      "username": "Rubeena",
+      "bio": "Rubeena",
+      "profileImage": "",
+      "backgroundImage": "",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "destinationUrl": "https://jazz.kiddlex.online/hemari/",
+      "redirectMode": "timed",
+      "redirectDelay": 0.5,
+      "buttons": [],
+      "videos": []
     }
   }
 }
